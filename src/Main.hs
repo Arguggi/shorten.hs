@@ -8,7 +8,7 @@ import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 
 version :: String
-version = "0.1"
+version = "0.1.0.0"
 
 defualtMax, defualtMin :: Int
 defualtMin = 8
@@ -16,17 +16,17 @@ defualtMax = 64
 
 data Options = Options {
     optInput  :: IO B.ByteString,
-              optOutput :: B.ByteString -> IO (),
-              optMin    :: Int,
-              optMax    :: Int
+    optOutput :: B.ByteString -> IO (),
+    optMin    :: Int,
+    optMax    :: Int
 }
 
 defaultOptions :: Options
 defaultOptions = Options {
     optInput  = B.getContents,
-              optOutput = B.putStr,
-              optMin    = defualtMin,
-              optMax    = defualtMax
+    optOutput = B.putStr,
+    optMin    = defualtMin,
+    optMax    = defualtMax
 }
 
 options :: [OptDescr (Options -> IO Options)]
@@ -63,7 +63,7 @@ showVersion _ = do
 
 showHelp :: Options -> IO Options
 showHelp _ = do
-    putStrLn "Usage: short.hs -i input -o output -m minL -M maxL"
+    putStrLn "Usage: shorten -i input -o output -m minL -M maxL"
     exitWith ExitSuccess
 
 readInput, writeOutput :: String -> Options -> IO Options
